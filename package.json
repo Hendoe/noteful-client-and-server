@@ -1,5 +1,5 @@
 {
-  "name": "noteful-client",
+  "name": "noteful-client-update",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,7 +7,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.6.0",
     "@fortawesome/react-fontawesome": "^0.1.3",
     "date-fns": "^1.30.1",
-    "react": "^16.6.3",
+    "react": "^16.13.1",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
@@ -15,6 +15,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "nodemon src/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -31,6 +32,7 @@
   "devDependencies": {
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
-    "enzyme-to-json": "^3.3.5"
+    "enzyme-to-json": "^3.3.5",
+    "nodemon": "^2.0.4"
   }
 }
