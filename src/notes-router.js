@@ -16,11 +16,9 @@ const serializeNote = note => ({
 notesRouter
   .route('/')
   .get((req, res, next) => {
-    console.log('tugging')
     const knexInstance = req.app.get('db')
     NotefulServices.getAllNotes(knexInstance)
       .then(notes => {
-        console.log('tagg notes', notes)
         res.json(notes.map(serializeNote))
       })
       .catch(next)
