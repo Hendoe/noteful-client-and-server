@@ -20,7 +20,6 @@ export default class AddNote extends Component {
       folderid: e.target['note-folder-id'].value,
       modified: new Date(),
     }
-    console.log(newNote)
     fetch(`${config.API_ENDPOINT}/notes`, {
       method: 'POST',
       headers: {
