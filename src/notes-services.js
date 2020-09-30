@@ -14,11 +14,11 @@ const NotefulServices = {
       });
   },
   getById(knex, id) {
-    return knex.from('noteful_notes').select('*').where('id', id).first()
+    return knex.from('noteful_notes').select('*').where('noteid', id).first()
   },
-  deleteNote(knex, id) {
+  deleteNote(knex, noteid) {
     return knex('noteful_notes')
-      .where({ id })
+      .where({ noteid })
       .delete()
   },
   updateNote(knex, id, newNoteFields) {

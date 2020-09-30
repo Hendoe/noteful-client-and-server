@@ -48,11 +48,11 @@ notesRouter
   })
 
 notesRouter
-  .route('/:note_id')
+  .route('/:noteid')
   .all((req, res, next) => {
     NotefulServices.getById(
       req.app.get('db'),
-      req.params.note_noteid
+      req.params.noteid
     )
       .then(note => {
         if (!note) {
@@ -71,7 +71,7 @@ notesRouter
   .delete((req, res, next) => {
     NotefulServices.deleteNote(
       req.app.get('db'),
-      req.params.note_noteid
+      req.params.noteid
     )
       .then(numRowsAffected => {
         res.status(204).end()
