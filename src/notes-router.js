@@ -6,10 +6,10 @@ const notesRouter = express.Router()
 const jsonParser = express.json()
 
 const serializeNote = note => ({
-  id: note.id,
+  noteid: note.noteid,
   name: xss(note.name),
   modified: note.modified,
-  folderId: note.folderId,
+  folderid: note.folderid,
   content: xss(note.content),
 })
 
@@ -24,15 +24,16 @@ notesRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    const { name, content, modified, folderId } = req.body
-    const newNote = { name, content }
+    console.log(req)
+    const { name, content, modified, folderid } = req.body
+    const newNote = { name, content, modified, folderid }
 
     for (const [key, value] of Object.entries(newNote))
       if (value == null)
         return res.status(400).json({
           error: { message: `Missing '${key}' in request body` }
         })
-    newNote.folderId = folderId
+    newNote.folderid = folderid
     NotefulServices.insertNote(
       req.app.get('db'),
       newNote
@@ -40,7 +41,7 @@ notesRouter
       .then(note => {
         res
           .status(201)
-          .location(`/notes/${note.id}`)
+          .location(`/notes/${note.noteid}`)
           .json(serializeNote(note))
       })
       .catch(next)
@@ -51,7 +52,7 @@ notesRouter
   .all((req, res, next) => {
     NotefulServices.getById(
       req.app.get('db'),
-      req.params.note_id
+      req.params.note_noteid
     )
       .then(note => {
         if (!note) {
@@ -70,7 +71,7 @@ notesRouter
   .delete((req, res, next) => {
     NotefulServices.deleteNote(
       req.app.get('db'),
-      req.params.note_id
+      req.params.note_noteid
     )
       .then(numRowsAffected => {
         res.status(204).end()
